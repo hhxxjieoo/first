@@ -7,9 +7,9 @@ spring:
     name: configserver
   #新配置
   cloud:
-    bus:
-      trace:
-        enable: true
+#    bus:
+#      trace:
+#        enable: true
     config:
       server:
         git:
