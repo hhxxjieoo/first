@@ -1,12 +1,33 @@
 server:
-  port: 8762
+  #  port: 8762
+  port: 8888
+
 spring:
   application:
     name: configserver
-  profiles:
-    active: native
+  #新配置
   cloud:
+    bus:
+      trace:
+        enable: true
     config:
       server:
-        native:
-          search-locations: classpath:/shared
+        git:
+          uri: https://github.com/hhxxjieoo/first.git
+          search-paths: config
+          username: hhxxjieoo
+          password: 88018
+      label: master
+#旧配置
+#  profiles:
+#    active: native
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: classpath:/shared
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
