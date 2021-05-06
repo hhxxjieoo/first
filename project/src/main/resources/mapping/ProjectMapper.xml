@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhj.repository.ProjectRepository">
+
+    <select id="findAll" resultType="Project">
+        select *
+        from demo.project
+        limit #{param1},#{param2}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from demo.project;
+    </select>
+
+    <select id="findById" parameterType="int" resultType="Project">
+        select *
+        from demo.project
+        where id = #{id}
+    </select>
+
+    <delete id="deleteProject" parameterType="int">
+        delete
+        from demo.project
+        where id = #{id}
+    </delete>
+
+    <update id="updateProject" parameterType="Project">
+        update demo.project
+        set projectName=#{projectName},
+            projectLeader=#{projectLeader},
+            status=#{status},
+            createdTime=#{createdTime},
+            startTime=#{startTime},
+            endTime=#{endTime},
+            difficulty=#{difficulty},
+            progress=#{progress}
+        where id = #{id};
+    </update>
+
+    <insert id="addProject" parameterType="Project">
+        insert into demo.project (projectName, projectLeader, status, createdTime, startTime, endTime, difficulty,
+                                  progress)
+        values (#{projectName}, #{projectLeader}, #{status}, #{createdTime}, #{startTime}, #{endTime}, #{difficulty},
+                #{progress})
+    </insert>
+
+</mapper>

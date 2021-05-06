@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+</head>
+<body class="layui-layout-body">
+<div class="layui-container" style="margin-top: 50px;width: 1500px;">
+
+    <table class="layui-hide" id="test" style="width: 300px" lay-filter="test"></table>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+    <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+    <script>
+        layui.use('table', function(){
+            var table = layui.table;
+
+            table.render({
+                elem: '#test'
+                ,url:'/projectClient/findAll'
+                ,title: '项目列表'
+                ,cols: [
+                    [
+                        {field:'id', width:100, title: '项目编号', sort: true}
+                        ,{field:'projectName', width:120, title: '项目名称'}
+                        ,{field:'projectLeader', width:100, title: '项目领导人'}
+                        ,{field:'status', width:70, title: '状态'}
+                        ,{field:'createdTime', width:220, title: '创建时间'}
+                        ,{field:'startTime', width:220, title: '实际开始时间'}
+                        ,{field:'endTime', width:200, title: '实际结束时间'}
+                        ,{field:'difficulty', width:100, title: '项目难度'}
+                        ,{field:'progress', width:100, title: '项目进度'}
+                        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:80}
+                ]
+                ]
+                ,page: true
+            });
+
+            //监听行工具事件
+            table.on('tool(test)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'delete'){
+                    layer.confirm('确定要删除吗？', function(index){
+                        window.location.href="/projectClient/deleteProject/"+data.id;
+                        layer.close(index);
+                    });
+                }
+            });
+        });
+    </script>
+
+</div>
+<script>
+    //二级菜单联动
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</body>
+</html>

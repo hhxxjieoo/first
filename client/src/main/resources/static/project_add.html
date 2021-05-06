@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 50px;">
+
+    <div class="layui-container" style="width: 500px;height: 330px;padding-top: 60px;">
+        <form class="layui-form" action="/projectClient/addProject" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称：</label>
+                <div class="layui-inline">
+                    <input type="text" name="projectName" lay-verify="projectName" autocomplete="off" placeholder="请输入项目名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目负责人：</label>
+                <div class="layui-inline">
+                    <input type="text" name="projectLeader" lay-verify="projectLeader" autocomplete="off" placeholder="请输入项目负责人" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目状态：</label>
+                <div class="layui-inline">
+                    <input type="text" name="status" lay-verify="required" placeholder="请输入项目状态" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">难度系数：</label>
+                <div class="layui-inline">
+                    <input type="text" name="difficulty" lay-verify="required" placeholder="请输入难度系数" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目进度：</label>
+                <div class="layui-inline">
+                    <input type="text" name="progress" lay-verify="required" placeholder="请输入项目进度" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn" lay-submit="" style="margin-left: 160px;">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'element'], function(){
+        var form = layui.form;
+        var element = layui.element;
+
+        //自定义验证规则
+        form.verify({
+            projectName: function(value){
+                if(value.length == 0){
+                    return "项目名称不能为空";
+                }
+            },
+            projectLeader: function(value){
+                if(value.length == 0){
+                    return "项目负责人不能为空";
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
